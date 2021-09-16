@@ -3,9 +3,11 @@ homebrew-virt-manager
 
 A set of [homebrew][homebrew] formulae to install [`virt-manager`][virt-manager] and [`virt-viewer`][virt-viewer] on Mac OSX.
 
+Using fixes from this issue comment: https://github.com/jeffreywildman/homebrew-virt-manager/issues/170#issuecomment-82234157
+
 ## Usage
 
-    brew tap jeffreywildman/homebrew-virt-manager
+    brew tap Senorsen/homebrew-virt-manager
     brew install virt-manager virt-viewer
     virt-manager -c test:///default
 
