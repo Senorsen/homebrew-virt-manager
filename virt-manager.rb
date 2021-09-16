@@ -3,8 +3,8 @@ class VirtManager < Formula
 
   desc "App for managing virtual machines"
   homepage "https://virt-manager.org/"
-  url "https://virt-manager.org/download/sources/virt-manager/virt-manager-2.2.1.tar.gz"
-  sha256 "cfd88d66e834513e067b4d3501217e21352fadb673103bacb9e646da9f029a1b"
+  url "https://virt-manager.org/download/sources/virt-manager/virt-manager-3.2.0.tar.gz"
+  sha256 "2b6fe3d90d89e1130227e4b05c51e6642d89c839d3ea063e0e29475fd9bf7b86"
   revision 3
 
   depends_on "intltool" => :build
@@ -25,10 +25,11 @@ class VirtManager < Formula
   depends_on "python"
   depends_on "spice-gtk"
   depends_on "vte3"
+  depends_on "docutils"
 
   resource "libvirt-python" do
-    url "https://libvirt.org/sources/python/libvirt-python-6.10.0.tar.gz"
-    sha256 "47a8e90d9f49bc0296d2817f6009e18dbb69844ce10b81c2a2672bccd6f49fd5"
+    url "https://libvirt.org/sources/python/libvirt-python-7.2.0.tar.gz"
+    sha256 "c0c3bac54c55622e17927b09cd9843869600d71842fb072c99491fe2608dcee7"
   end
 
   resource "idna" do
@@ -57,17 +58,17 @@ class VirtManager < Formula
   end
 
   # virt-manager doesn't prompt for password on macOS unless --no-fork flag is provided
-  patch :DATA
+  #patch :DATA
 
   def install
     venv = virtualenv_create(libexec, "python3")
     venv.pip_install resources
 
     # virt-manager uses distutils, doesn't like --single-version-externally-managed
-    system "#{libexec}/bin/python", "setup.py",
+    system "#{libexec}/bin/python3", "setup.py",
                      "configure",
                      "--prefix=#{libexec}"
-    system "#{libexec}/bin/python", "setup.py",
+    system "#{libexec}/bin/python3", "setup.py",
                      "--no-user-cfg",
                      "--no-update-icon-cache",
                      "--no-compile-schemas",
